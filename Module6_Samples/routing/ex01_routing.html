@@ -1,0 +1,56 @@
+<!doctype html>
+<html ng-app="routingSample">
+  <head>
+    <script src="js/angular.min.js"></script>
+    <script src="ex01_script.js"></script>
+  </head>
+  <body>
+    <div ng-controller="MainController">
+      Select:
+      <a href="/Course/cs520">CS520</a> |
+      <a href="/Course/cs520/Term/spring">
+          CS520: Spring Term</a> |
+      <a href="/Course/cs701">CS701</a> |
+      <a href="/Course/cs701/Term/fall?year=2014">
+          CS701: Fall Term (2014)</a> 
+    
+      <div ng-view></div>
+     
+      <hr/>
+    <span ng-non-bindable>{{$location.path()}}</span>:
+        {{$location.path()}}<br/>
+    <span ng-non-bindable>{{$route.current.templateUrl}}</span>:
+        {{$route.current.templateUrl}}<br/>
+    <span ng-non-bindable>{{$route.current.params}}</span>:
+        {{$route.current.params}}<br/>
+    <span ng-non-bindable>{{$route.current.scope.name}}</span>:
+        {{$route.current.scope.name}}<br/>
+    <span ng-non-bindable>{{$routeParams}}</span>:
+        {{$routeParams}}
+    <hr/>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

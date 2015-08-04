@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang='en' ng-app>
+  <head>
+   <title>Book Shopping Cart</title>
+
+  <script src="js/angular.js"></script>
+  <script>
+    function CartControler($scope) {
+    	$scope.saved = localStorage.getItem('books');
+    	$scope.books = (localStorage.getItem('books')!==null) ? JSON.parse($scope.saved) : [{title: 'Absolute Java', qty: 1, price: 114.95}, {title: 'Pro HTML5', qty: 1, price: 27.95}, {title: 'Head First HTML5', qty: 1, price: 27.89}];
+      localStorage.setItem('books', JSON.stringify($scope.books));
+
+      $scope.removeBook = function(index) {
+        $scope.books.splice(index, 1);
+      }
+      
+      $scope.change = function() {
+      	var total = 0;
+        angular.forEach($scope.books, function(book){
+        	total += book.qty * book.price;
+        });
+        return total;
+      }
+      $scope.new = function() {
+        $scope.books.push(
+        {
+        	title: 'New Book', qty: 1, price: 10.99
+        })
+      }
+      $scope.save = function() {
+        localStorage.setItem('books', JSON.stringify($scope.books));
+	
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/ex05.css">
+  </head>
+
+  <body ng-controller="CartControler">
+
+    <table>
+      <caption><b>My Books</b></caption>
+      <thead>
+        <tr>
+            <th>Title</th>
+            <th>Qty</th>
+            <th>UnitPrice</th>
+            <th>$UnitPrice</th>
+            <th>LineTotal</th>
+            <th ng-model="total">Total {{change()}}</th>
+            <th></th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="book in books">
+        <tr>
+            <td><input ng-model="book.title"></td>
+            <td>
+                <input ng-model="book.qty" ng-change="change()" size="2">
+            </td>
+            <td><input ng-model="book.price" ng-change="change()" size="6"></td>
+            <td>{{book.price | currency}}</td>
+            <td>{{book.price * book.qty | currency}}</td>
+            <td colspan="2">
+                <button ng-click="removeBook($index)">
+                    Remove
+                </button>
+            </td>
+        </tr>
+      </tbody>
+      <tfoot><tr>
+      	<th colspan="3"><button ng-click="new()">
+                    New
+                </button></th>
+                
+        <th colspan="4"><button ng-click="save()">
+                    Save
+                </button></th>
+                
+      </tr></tfoot>
+    </table>
+  </body>
+</html>
+
+

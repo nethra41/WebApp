@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Q1b</title>
+    <script type="text/javascript">
+
+        var project = (function() {
+            var salary = 50000;
+            var salaryDate = "September 29, 2014";	//private variable
+            //console.log(salaryDate); 
+            var showSalaryDate = function(date) { 	//private method
+            	return date;
+            }
+        	return {
+            getSalary: function(){
+                return salary;
+            },
+            setSalary: function(newValue){
+            
+                    salary = newValue;
+                    console.log("New value set for salary: "+salary);
+               },
+            showSalary: function(){		//public method
+                     //console.log(salaryDate);
+            	sd = showSalaryDate(salaryDate);
+            	return sd;
+            	
+            }
+            
+              };
+        })();
+        
+        console.log(project.getSalary());
+        console.log(project.showSalary());  
+        
+        project.setSalary(20000);
+         
+       
+    </script>
+</head>
+<body>
+			<b>Output logged to console...</b>
+</body>
+</html>

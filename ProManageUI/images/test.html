@@ -1,0 +1,51 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Demo</title>
+        <link rel="stylesheet" href="css/demo.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/demo-print.css" type="text/css" media="print">
+        <script src="https://code.jquery.com/jquery-1.6.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            function addval(x){
+     values1 = $(x).val();
+     $('#right ul').append("<li><img height='20px' width='20px' src='http://www.clker.com/cliparts/H/Z/0/R/f/S/warning-icon-hi.png' name='"+ values1 +"' value='" + values1 + "' onclick='removeval(this, \"" + values1 + "\")'></img>"+ values1 +"</li>");
+     $(x).parent().remove();
+ 
+ }
+ function removeval(y,val){
+     values2 = val;
+     $('#left ul').append("<li><input type='checkbox' value='"+ values2 +"' name='"+ values2 +"' onclick='addval(this)' />"+ values2 +"</li>");
+     $(y).parent().remove();
+ 
+ }
+        </script>
+		<style>
+div { border:1px #ccc solid; height:100px; overflow:auto; width:200px; background:#f1f1f1; }
+ ul { margin:0; padding:0; }
+ ul li { list-style:none; }
+		</style>
+    </head>
+    <body>
+	<table>
+<tr>
+    <td>
+        <div id="left">
+            <ul>
+                <li><input type="checkbox" value="Option 1" onclick="addval(this)" />Option 1</li>
+                <li><input type="checkbox" value="Option 2" onclick="addval(this)" />Option 2</li>
+            </ul>
+        </div>
+    </td>
+    <td>
+        <div id="right">
+            <ul>
+            </ul>
+        </div>
+    </td>
+</tr>
+</table>
+
+    </body>
+</html>

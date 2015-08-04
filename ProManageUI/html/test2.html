@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <title>jQuery UI Example - Droppable</title>
+        <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" 
+                rel="stylesheet" />
+        <script type="text/javascript" 
+                src="js/jquery-1.8.0.min.js"></script>
+        <script type="text/javascript" 
+                src="js/jquery-ui-1.8.23.custom.min.js"></script>
+                
+        <script type="text/javascript">
+            $(function() {
+                    var options = {revert : 'invalid', color: 'black'};
+                    $('#src h3').draggable(options);
+                    
+                    options = {drop : handleDrop};
+                    $('#target1').droppable(options);
+
+                    var options2 = {revert : 'invalid', color: 'orange'};
+                    $('#target1 h3').draggable(options2);
+                    
+                    options2 = {drop : handleDrop2};
+                    $('#target2').droppable(options2);
+            });
+            
+            function handleDrop(event, ui) {
+                var elem = ui.draggable;
+                $('#target1').append(elem);
+                $(elem).css({position : 'relative', color:'orange',top: '0px', left : '0px'});
+            }
+          function handleDrop2(event, ui) {
+                var elem = ui.draggable;
+
+                var color = elem.css('color');
+               // console.log(color);
+                if(color == 'rgb(255, 165, 0)') 
+                $('#target2').append(elem);
+                $(elem).css({ position : 'relative', color:'black', top: '0px', left : '0px'}); 
+            }
+        </script>
+        <style>
+            td {width: 400px;
+                    height: 200px}
+            
+        </style>
+    </head>
+    <body>
+            <h2>JQuery UI Draggable/Droppable </h2>
+            <table>
+            <thead>
+                <th>Source</th>
+                <th>Drop 1</th>
+                <th>Drop 2</th>
+                
+            </thead>
+                <tr>
+            <td id="src" class="ui-widget-content ui-corner-all">
+                 
+                <h3>one</h3>
+                <h3>two</h3>
+                <h3>three</h3>
+                <h3>four</h3>
+                <h3>one</h3>
+                <h3>two</h3>
+                <h3>three</h3>
+                <h3>four</h3>
+                <h3>one</h3>
+                <h3>two</h3>
+                <h3>three</h3>
+                <h3>four</h3>      
+            </td> 
+            
+            
+             <td id="target1" class="ui-widget-content ui-corner-all">
+               
+            </td>
+           
+            
+             <td id="target2" class="ui-widget-content ui-corner-all">
+               
+            </td>
+            </tr>
+            </table>
+    </body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html ng-app="ui.bootstrap.demo">
+  <head>
+  <title>CS575</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="js/script.js"></script>
+	
+	
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+	table, th {
+		text-align: center;
+		border-color: black;
+	}
+	.normal {
+		background-color: white;
+	}
+	</style>
+  </head>
+  <body>
+  <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">CS575</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          
+          </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+	<div class="container">
+		<!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1><center>TLB replacement Algorithm</center></h1><hr>
+		<a href="html/cpu.html" class="btn btn-warning" style="float:right;"> Page Replacement </a>
+	</div>
+	<div ng-controller="AccordionCtrl">
+	
+	<div class="col-md-2">
+		<table class="table table-bordered" ng-class="classTLB">
+			<tr><th> TLB </th></tr>
+			<tr ng-show="state == 'show'"><td> (3 , 2) </td></tr>
+			<tr ng-show="state3 == 'show3'"><td><del>(3 , 2)</del> (7 , 8) </td></tr>
+			<tr ng-show="state2 == 'show2'"><td> (0xe , 5) </td></tr>
+			<tr ng-show="state4 == 'show4'"><td> <del>(0xe , 5)</del> (3 , 2) </td></tr>
+		</table>
+	</div>
+	<div class="col-md-2">
+		<table class="table table-bordered" ng-class="classPT">
+			<tr><th> Page Table </th></tr>
+			<tr ng-show="state == 'show'"><td> (3) 2 </td></tr>
+			<tr ng-show="state == 'show3'"><td> (3) 2 </td></tr>
+			<tr ng-show="state3 == 'show3'"><td> (7) 8 </td></tr>
+			<tr ng-show="state2 == 'show2'"><td> (0xe) 5 </td></tr>
+			<tr ng-show="state2 == 'show4'"><td> (0xe) 5 </td></tr>
+		</table>
+	</div>
+	<div class="col-md-2">
+		<table class="table table-bordered">
+			<tr><th> Frame# </th></tr>
+			<tr ng-class="frame2"><td> 2 </td></tr>
+			<tr ng-class="frame5"><td> 5 </td></tr>
+			<tr ng-class="frame8"><td> 8 </td></tr>
+			<tr><td> 1 </td></tr>
+		</table>
+		
+	</div>
+	<div class="col-md-2">  </div>
+	<div class="col-md-4">
+			<label class="checkbox">
+			<input type="checkbox" ng-model="oneAtATime">
+			Open only one at a time
+		  </label>
+		  <accordion close-others="oneAtATime">
+			<accordion-group heading="0x3d" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+			  <p>Page#: <b>0x3</b> Offset: <b>0xd</b></p>
+			  <a href="" ng-click="c1 =! c1; notFoundTLB()" ng-hide="c1">Access TLB</a>
+			  <div ng-show="c1"><span ng-class="classTLBs"> TLB miss! (not found!)</span><br> <a href="" ng-click="c2 =! c2; notFoundPT()" ng-hide="c2">Access Page Table</a></div>
+			  <div ng-show="c2"><span ng-class="classPTs"> Page Fault! (not found!) </span><br> <a href="" ng-click="c3 =! c3; updateOne()" ng-hide="c3">Update TLB & Page Table</a></div>
+			  <div ng-show="c3"><span> <span ng-class="frame2">Frame# 2</span> accessed.</span><br> <a href="" ng-click="c4 =! c4" ng-hide="c4">Physical Address</a> </div>
+			  <hr><p ng-show="c4">Frame#: <b>0x2</b> Offset:<b>0xd</b><br>Physical Address: 0x2d</p>
+			  
+			</accordion-group>
+			<accordion-group heading="0x30">
+			  <p>Page#: <b>0x3</b> Offset: <b>0x0</b></p>
+			  <a href="" ng-click="c11 =! c11; FoundTLB()" ng-hide="c11">Access TLB</a>
+			  <div ng-show="c11"><span ng-class="classTLBs"> TLB Hit! (found!)</span><br> <a href="" ng-click="c12 =! c12; FoundPT()" ng-hide="c12">Access Page Table</a></div>
+			  <div ng-show="c12"><span ng-class="classPTs"> Access Physical Frame! (found!) </span><br> <a href="" ng-click="c13 =! c13; updateOne()" ng-hide="c13">Update TLB & Page Table</a></div>
+			  <div ng-show="c13"><span> Already exists!</span><br> <a href="" ng-click="c14 =! c14" ng-hide="c14">Physical Address</a> </div>
+			  <hr><p ng-show="c14">Frame#: <b>0x2</b> Offset:<b>0x0</b><br>Physical Address: 0x20</p>
+			  
+			</accordion-group>
+			<accordion-group heading="0xe5" >
+			  <p>Page#: <b>0xe</b> Offset: <b>0x5</b></p>
+			  <a href="" ng-click="c21 =! c21; notFoundTLB()" ng-hide="c21">Access TLB</a>
+			  <div ng-show="c21"><span ng-class="classTLBs"> TLB Miss! (not found!)</span><br> <a href="" ng-click="c22 =! c22; notFoundPT()" ng-hide="c22">Access Page Table</a></div>
+			  <div ng-show="c22"><span ng-class="classPTs"> Page Fault! (not found!) </span><br> <a href="" ng-click="c23 =! c23; updateTwo()" ng-hide="c23">Update TLB & Page Table</a></div>
+			  <div ng-show="c23"><span> <span ng-class="frame5">Frame# 5</span> accessed!</span><br> <a href="" ng-click="c24 =! c24" ng-hide="c24">Physical Address</a> </div>
+			  <hr><p ng-show="c24">Frame#: <b>0x5</b> Offset:<b>0x5</b><br>Physical Address: 0x55</p>
+			  
+			</accordion-group>
+			<accordion-group heading="0x7d" >
+			  <p>Page#: <b>0x7</b> Offset: <b>0xd</b></p>
+			  <a href="" ng-click="c31 =! c31; notFoundTLB()" ng-hide="c31">Access TLB</a>
+			  <div ng-show="c31"><span ng-class="classTLBs"> TLB Miss! (not found!)</span><br> <a href="" ng-click="c32 =! c32; notFoundPT()" ng-hide="c32">Access Page Table</a></div>
+			  <div ng-show="c32"><span ng-class="classPTs"> Page Fault! (not found!) </span><br> <a href="" ng-click="c33 =! c33; updateThree()" ng-hide="c33">Update TLB & Page Table</a></div>
+			  <div ng-show="c33"><span> <span ng-class="frame8">Frame# 8</span> accessed! In TLB (3,2) entry is replaced.</span><br> <a href="" ng-click="c34 =! c34" ng-hide="c34">Physical Address</a> </div>
+			  <hr><p ng-show="c34">Frame#: <b>0x8</b> Offset:<b>0xd</b><br>Physical Address: 0x8d</p>
+			  
+			</accordion-group>
+			<accordion-group heading="0x33" >
+			  <p>Page#: <b>0x3</b> Offset: <b>0x3</b></p>
+			  <a href="" ng-click="c41 =! c41; notFoundTLB()" ng-hide="c41">Access TLB</a>
+			  <div ng-show="c41"><span ng-class="classTLBs"> TLB Miss! (not found!)</span><br> <a href="" ng-click="c42 =! c42; FoundPT()" ng-hide="c42">Access Page Table</a></div>
+			  <div ng-show="c42"><span ng-class="classPTs"> Access Physical Frame! (found!) </span><br> <a href="" ng-click="c43 =! c43; updateFour()" ng-hide="c43">Update TLB & Page Table</a></div>
+			  <div ng-show="c43"><span> Frame# 2 accessed! In TLB (0xe,5) entry is replaced.</span><br> <a href="" ng-click="c44 =! c44" ng-hide="c44">Physical Address</a> </div>
+			  <hr><p ng-show="c44">Frame#: <b>0x2</b> Offset:<b>0x3</b><br>Physical Address: 0x23</p>
+			  
+			</accordion-group>
+			
+		  </accordion>
+	</div>
+
+	</div>
+	
+	
+</div>
+  </body>
+</html>

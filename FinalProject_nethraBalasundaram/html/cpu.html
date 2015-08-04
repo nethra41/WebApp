@@ -1,0 +1,406 @@
+<!doctype html>
+<html ng-app="ui.bootstrap.demo">
+  <head>
+  <title>CS575</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="../js/script.js"></script>
+	
+	
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+	table, th {
+		text-align: center;
+		border-color: black;
+	}
+	.normal {
+		background-color: white;
+	}
+	</style>
+  </head>
+  <body>
+  <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">CS575</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          
+          </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+	<div class="container">
+		<!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1><center>Page Replacement</center></h1><hr>
+		<a href="html/cpu.html" class="btn btn-warning" style="float:left;"> TLB & Page Table </a>
+		</div>
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<tr>
+				<th> Reference<br>String </th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>3</th>
+				<th>4</th>
+				<th>1</th>
+				<th>6</th>
+				<th>7</th>
+				<th>8</th>
+				<th>7</th>
+				<th>8</th>
+				<th>9</th>
+				<th>7</th>
+				<th>8</th>
+				<th>9</th>
+				<th>5</th>
+				<th>4</th>
+				<th>5</th>
+				<th>4</th>
+				<th>2</th>
+				<th>8</th>
+			</tr>
+		</table>
+	</div>
+	<div class="table-responsive">
+	<h2>Optimal Page Replacement</h2>
+		<table class="table table-bordered">
+			<tr>
+				<th> Reference<br>String </th>
+				<th> <a href="" ng-click="c1 =! c1" ng-hide="c1">1</a> </th>
+				<th> <a href="" ng-click="c2 =! c2" ng-hide="c2">2</a> </th>
+				<th> <a href="" ng-click="c3 =! c3" ng-hide="c3">3</a> </th>
+				<th> <a href="" ng-click="c4 =! c4" ng-hide="c4">4</a> </th>
+				<th> <a href="" ng-click="c5 =! c5" ng-hide="c5">5</a> </th>
+				<th> <a href="" ng-click="c6 =! c6" ng-hide="c6">3</a> </th>
+				<th> <a href="" ng-click="c7 =! c7" ng-hide="c7">4</a> </th>
+				<th> <a href="" ng-click="c8 =! c8" ng-hide="c8">1</a> </th>
+				<th> <a href="" ng-click="c9 =! c9" ng-hide="c9">6</a> </th>
+				<th> <a href="" ng-click="c10 =! c10" ng-hide="c10">7</a> </th>
+				<th> <a href="" ng-click="c11 =! c11" ng-hide="c11">8</a> </th>
+				<th> <a href="" ng-click="c12 =! c12" ng-hide="c12">7</a> </th>
+				<th> <a href="" ng-click="c13 =! c13" ng-hide="c13">8</a> </th>
+				<th> <a href="" ng-click="c14 =! c14" ng-hide="c14">9</a> </th>
+				<th> <a href="" ng-click="c15 =! c15" ng-hide="c15">7</a> </th>
+				<th> <a href="" ng-click="c16 =! c16" ng-hide="c16">8</a> </th>
+				<th> <a href="" ng-click="c17 =! c17" ng-hide="c17">9</a> </th>
+				<th> <a href="" ng-click="c18 =! c18" ng-hide="c18">5</a> </th>
+				<th> <a href="" ng-click="c19 =! c19" ng-hide="c19">4</a> </th>
+				<th> <a href="" ng-click="c20 =! c20" ng-hide="c20">5</a> </th>
+				<th> <a href="" ng-click="c21 =! c21" ng-hide="c21">4</a> </th>
+				<th> <a href="" ng-click="c22 =! c22" ng-hide="c22">2</a> </th>
+				<th> <a href="" ng-click="c23 =! c23" ng-hide="c23">8</a> </th>
+			</tr>
+			<tr>
+				<td> Frame# 1 </td>
+				<td ng-show="c1" class="text-danger"><u> 1 </u></td>
+				<td ng-show="c2"> 1 </td>
+				<td ng-show="c3"> 1 </td>
+				<td ng-show="c4"> 1 </td>
+				<td ng-show="c5"> 1 </td>
+				<td ng-show="c6"> 1 </td>
+				<td ng-show="c7"> 1 </td>
+				<td ng-show="c8" class="text-danger"><u> 1 </u></td>
+				<td ng-show="c9" class="text-danger"><del>1</del>&nbsp;<u>6 </u></td>
+				<td ng-show="c10"> 6 </td>
+				<td ng-show="c11" class="text-danger"><del>6</del>&nbsp;<u>8</u> </td>
+				<td ng-show="c12"> 8 </td>
+				<td ng-show="c13" class="text-danger"><u> 8 </u></td>
+				<td ng-show="c14"> 8 </td>
+				<td ng-show="c15"> 8 </td>
+				<td ng-show="c16" class="text-danger"> <u>8</u> </td>
+				<td ng-show="c17"> 8 </td>
+				<td ng-show="c18"> 8 </td>
+				<td ng-show="c19"> 8 </td>
+				<td ng-show="c20"> 8 </td>
+				<td ng-show="c21"> 8 </td>
+				<td ng-show="c22"> 8 </td>
+				<td ng-show="c23" class="text-danger"><u> 8 </u></td>
+			</tr>
+			<tr>
+				<td> Frame# 2 </td>
+				<td ng-show="c1"> <span> &nbsp; </span> </td>
+				<td ng-show="c2" class="text-danger"><u> 2 </u></td>
+				<td ng-show="c3"> 2 </td>
+				<td ng-show="c4"> 2 </td>
+				<td ng-show="c5" class="text-danger"><del>2</del>&nbsp;<u> 5</u> </td>
+				<td ng-show="c6"> 5 </td>
+				<td ng-show="c7"> 5 </td>
+				<td ng-show="c8"> 5 </td>
+				<td ng-show="c9"> 5 </td>
+				<td ng-show="c10"> 5 </td>
+				<td ng-show="c11"> 5 </td>
+				<td ng-show="c12"> 5 </td>
+				<td ng-show="c13"> 5 </td>
+				<td ng-show="c14"> 5 </td>
+				<td ng-show="c15"> 5 </td>
+				<td ng-show="c16"> 5 </td>
+				<td ng-show="c17"> 5 </td>
+				<td ng-show="c18" class="text-danger"> <u>5</u> </td>
+				<td ng-show="c19"> 5 </td>
+				<td ng-show="c20" class="text-danger"> <u>5</u> </td>
+				<td ng-show="c21"> 5 </td>
+				<td ng-show="c22"> 5 </td>
+				<td ng-show="c23"> 5 </td>
+			</tr>
+			<tr>
+				<td> Frame# 3 </td>
+				<td ng-show="c1"> <span> &nbsp; </span> </td>
+				<td ng-show="c2"> <span> &nbsp; </span> </td>
+				<td ng-show="c3" class="text-danger"> <u>3</u> </td>
+				<td ng-show="c4"> 3 </td>
+				<td ng-show="c5"> 3 </td>
+				<td ng-show="c6" class="text-danger"> <u>3</u> </td>
+				<td ng-show="c7"> 3 </td>
+				<td ng-show="c8"> 3 </td>
+				<td ng-show="c9"> 3 </td>
+				<td ng-show="c10" class="text-danger"><del>3</del>&nbsp;<u>7</u> </td>
+				<td ng-show="c11"> 7 </td>
+				<td ng-show="c12" class="text-danger"><u> 7 </u></td>
+				<td ng-show="c13"> 7 </td>
+				<td ng-show="c14"> 7 </td>
+				<td ng-show="c15" class="text-danger"> <u>7</u> </td>
+				<td ng-show="c16"> 7 </td>
+				<td ng-show="c17"> 7 </td>
+				<td ng-show="c18"> 7 </td>
+				<td ng-show="c19" class="text-danger"><del>7</del>&nbsp;<u>4</u></td>
+				<td ng-show="c20"> 4 </td>
+				<td ng-show="c21" class="text-danger"><u>4</u></td>
+				<td ng-show="c22"> 4 </td>
+				<td ng-show="c23"> 4 </td>
+			</tr>
+			<tr>
+				<td> Frame# 4 </td>
+				<td ng-show="c1"> <span> &nbsp; </span> </td>
+				<td ng-show="c2"> <span> &nbsp; </span> </td>
+				<td ng-show="c3"> <span> &nbsp; </span> </td>
+				<td ng-show="c4" class="text-danger"><u> 4</u> </td>
+				<td ng-show="c5"> 4 </td>
+				<td ng-show="c6"> 4 </td>
+				<td ng-show="c7" class="text-danger"> <u>4</u> </td>
+				<td ng-show="c8"> 4 </td>
+				<td ng-show="c9"> 4 </td>
+				<td ng-show="c10"> 4 </td>
+				<td ng-show="c11"> 4 </td>
+				<td ng-show="c12"> 4 </td>
+				<td ng-show="c13"> 4 </td>
+				<td ng-show="c14" class="text-danger"><del>4</del>&nbsp;<u>9</u> </td>
+				<td ng-show="c15"> 9 </td>
+				<td ng-show="c16"> 9 </td>
+				<td ng-show="c17" class="text-danger"><u> 9</u> </td>
+				<td ng-show="c18"> 9 </td>
+				<td ng-show="c19"> 9 </td>
+				<td ng-show="c20"> 9 </td>
+				<td ng-show="c21"> 9 </td>
+				<td ng-show="c22" class="text-danger"><del>9</del>&nbsp;<u>2</u> </td>
+				<td ng-show="c23"> 2 </td>
+			</tr>
+			<tr>
+				<td> Page<br>Faults </td>
+				<td ng-show="c1"><img src="images/wrong.jpg" height="50px" width="50px"></td>
+				<td ng-show="c2"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c3"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c4"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c5"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c6"> <span> &nbsp; </span> </td>
+				<td ng-show="c7"> <span> &nbsp; </span> </td>
+				<td ng-show="c8"> <span> &nbsp; </span> </td>
+				<td ng-show="c9"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c10"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c11"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c12"> <span> &nbsp; </span> </td>
+				<td ng-show="c13"> <span> &nbsp; </span> </td>
+				<td ng-show="c14"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c15"> <span> &nbsp; </span> </td>
+				<td ng-show="c16"> <span> &nbsp; </span> </td>
+				<td ng-show="c17"> <span> &nbsp; </span> </td>
+				<td ng-show="c18"> <span> &nbsp; </span> </td>
+				<td ng-show="c19"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c20"> <span> &nbsp; </span> </td>
+				<td ng-show="c21"> <span> &nbsp; </span> </td>
+				<td ng-show="c22"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c23"> <span> &nbsp; </span> </td>
+			</tr>
+			
+		</table><br>
+	<h2 ng-show="c23" class="text-danger"> No. of Page Faults : 11</h2>
+	</div>
+<!-- ===================================================================================== -->
+	<div class="table-responsive">
+	<h2>LRU Page Replacement</h2>
+		<table class="table table-bordered">
+			<tr>
+				<th> Reference<br>Strings </th>
+				<th> <a href="" ng-click="c01 =! c01" ng-hide="c01">1</a> </th>
+				<th> <a href="" ng-click="c02 =! c02" ng-hide="c02">2</a> </th>
+				<th> <a href="" ng-click="c03 =! c03" ng-hide="c03">3</a> </th>
+				<th> <a href="" ng-click="c04 =! c04" ng-hide="c04">4</a> </th>
+				<th> <a href="" ng-click="c05 =! c05" ng-hide="c05">5</a> </th>
+				<th> <a href="" ng-click="c06 =! c06" ng-hide="c06">3</a> </th>
+				<th> <a href="" ng-click="c07 =! c07" ng-hide="c07">4</a> </th>
+				<th> <a href="" ng-click="c08 =! c08" ng-hide="c08">1</a> </th>
+				<th> <a href="" ng-click="c09 =! c09" ng-hide="c09">6</a> </th>
+				<th> <a href="" ng-click="c010 =! c010" ng-hide="c010">7</a> </th>
+				<th> <a href="" ng-click="c011 =! c011" ng-hide="c011">8</a> </th>
+				<th> <a href="" ng-click="c012 =! c012" ng-hide="c012">7</a> </th>
+				<th> <a href="" ng-click="c013 =! c013" ng-hide="c013">8</a> </th>
+				<th> <a href="" ng-click="c014 =! c014" ng-hide="c014">9</a> </th>
+				<th> <a href="" ng-click="c015 =! c015" ng-hide="c015">7</a> </th>
+				<th> <a href="" ng-click="c016 =! c016" ng-hide="c016">8</a> </th>
+				<th> <a href="" ng-click="c017 =! c017" ng-hide="c017">9</a> </th>
+				<th> <a href="" ng-click="c018 =! c018" ng-hide="c018">5</a> </th>
+				<th> <a href="" ng-click="c019 =! c019" ng-hide="c019">4</a> </th>
+				<th> <a href="" ng-click="c020 =! c020" ng-hide="c020">5</a> </th>
+				<th> <a href="" ng-click="c021 =! c021" ng-hide="c021">4</a> </th>
+				<th> <a href="" ng-click="c022 =! c022" ng-hide="c022">2</a> </th>
+				<th> <a href="" ng-click="c023 =! c023" ng-hide="c023">8</a> </th>
+			</tr>
+			<tr>
+				<td> Frame# 1 </td>
+				<td ng-show="c01" class="text-danger"><u> 1 </u></td>
+				<td ng-show="c02"> 1 </td>
+				<td ng-show="c03"> 1 </td>
+				<td ng-show="c04"> 1 </td>
+				<td ng-show="c05" class="text-danger"> <del>1</del>&nbsp;<u>5</u> </td>
+				<td ng-show="c06"> 5 </td>
+				<td ng-show="c07"> 5 </td>
+				<td ng-show="c08"> 5 </td>
+				<td ng-show="c09"> 5 </td>
+				<td ng-show="c010"> 5 </td>
+				<td ng-show="c011" class="text-danger"><del>5</del>&nbsp;<u>8</u> </td>
+				<td ng-show="c012"> 8 </td>
+				<td ng-show="c013" class="text-danger"><u> 8 </u></td>
+				<td ng-show="c014"> 8 </td>
+				<td ng-show="c015"> 8 </td>
+				<td ng-show="c016" class="text-danger"> <u>8</u> </td>
+				<td ng-show="c017"> 8 </td>
+				<td ng-show="c018"> 8 </td>
+				<td ng-show="c019"> 8 </td>
+				<td ng-show="c020"> 8 </td>
+				<td ng-show="c021"> 8 </td>
+				<td ng-show="c022" class="text-danger"><del>8</del>&nbsp;<u> 2 </u></td>
+				<td ng-show="c023"> 2 </td>
+			</tr>
+			<tr>
+				<td> Frame# 2 </td>
+				<td ng-show="c01"> <span> &nbsp; </span> </td>
+				<td ng-show="c02" class="text-danger"><u> 2 </u></td>
+				<td ng-show="c03"> 2 </td>
+				<td ng-show="c04"> 2 </td>
+				<td ng-show="c05"> 2 </td>
+				<td ng-show="c06"> 2 </td>
+				<td ng-show="c07"> 2 </td>
+				<td ng-show="c08" class="text-danger"><del>2</del>&nbsp;<u>1</u> </td>
+				<td ng-show="c09"> 1 </td>
+				<td ng-show="c010"> 1 </td>
+				<td ng-show="c011"> 1 </td>
+				<td ng-show="c012"> 1 </td>
+				<td ng-show="c013"> 1 </td>
+				<td ng-show="c014" class="text-danger"><del>1</del>&nbsp;<u>9</u> </td>
+				<td ng-show="c015"> 9 </td>
+				<td ng-show="c016"> 9 </td>
+				<td ng-show="c017" class="text-danger"> <u>9</u> </td>
+				<td ng-show="c018"> 9 </td>
+				<td ng-show="c019"> 9 </td>
+				<td ng-show="c020"> 9 </td>
+				<td ng-show="c021"> 9 </td>
+				<td ng-show="c022"> 9 </td>
+				<td ng-show="c023" class="text-danger"><del>9</del>&nbsp;<u>8</u> </td>
+			</tr>
+			<tr>
+				<td> Frame# 3 </td>
+				<td ng-show="c01"> <span> &nbsp; </span> </td>
+				<td ng-show="c02"> <span> &nbsp; </span> </td>
+				<td ng-show="c03" class="text-danger"> <u>3</u> </td>
+				<td ng-show="c04"> 3 </td>
+				<td ng-show="c05"> 3 </td>
+				<td ng-show="c06" class="text-danger"> <u>3</u> </td>
+				<td ng-show="c07"> 3 </td>
+				<td ng-show="c08"> 3 </td>
+				<td ng-show="c09" class="text-danger"><del>3</del>&nbsp; <u>6</u></td>
+				<td ng-show="c010"> 6 </td>
+				<td ng-show="c011"> 6 </td>
+				<td ng-show="c012"> 6 </td>
+				<td ng-show="c013"> 6 </td>
+				<td ng-show="c014"> 6 </td>
+				<td ng-show="c015"> 6 </td>
+				<td ng-show="c016"> 6 </td>
+				<td ng-show="c017"> 6 </td>
+				<td ng-show="c018" class="text-danger"><del>6</del>&nbsp;<u>5</u></td>
+				<td ng-show="c019"> 5 </td>
+				<td ng-show="c020" class="text-danger"><u>5</u></td>
+				<td ng-show="c021"> 5 </td>
+				<td ng-show="c022"> 5 </td>
+				<td ng-show="c023"> 5 </td>
+			</tr>
+			<tr>
+				<td> Frame# 4 </td>
+				<td ng-show="c01"> <span> &nbsp; </span> </td>
+				<td ng-show="c02"> <span> &nbsp; </span> </td>
+				<td ng-show="c03"> <span> &nbsp; </span> </td>
+				<td ng-show="c04" class="text-danger"><u> 4</u> </td>
+				<td ng-show="c05"> 4 </td>
+				<td ng-show="c06"> 4 </td>
+				<td ng-show="c07" class="text-danger"> <u>4</u> </td>
+				<td ng-show="c08"> 4 </td>
+				<td ng-show="c09"> 4 </td>
+				<td ng-show="c010" class="text-danger"><del>4</del>&nbsp;<u>7</u></td>
+				<td ng-show="c011"> 7 </td>
+				<td ng-show="c012" class="text-danger"><u>7</u></td>
+				<td ng-show="c013"> 7 </td>
+				<td ng-show="c014"> 7 </td>
+				<td ng-show="c015" class="text-danger"><u>7</u> </td>
+				<td ng-show="c016"> 7 </td>
+				<td ng-show="c017"> 7 </td>
+				<td ng-show="c018"> 7 </td>
+				<td ng-show="c019" class="text-danger"><del>7</del>&nbsp;<u>4</u></td>
+				<td ng-show="c020"> 4 </td>
+				<td ng-show="c021" class="text-danger"><u>4</u></td>
+				<td ng-show="c021"> 4 </td>
+				<td ng-show="c023"> 4 </td>
+			</tr>
+			<tr>
+				<td> Page<br>Faults </td>
+				<td ng-show="c01"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c02"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c03"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c04"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c05"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c06"> <span> &nbsp; </span> </td>
+				<td ng-show="c07"> <span> &nbsp; </span> </td>
+				<td ng-show="c08"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c09"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c010"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c011"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c012"> <span> &nbsp; </span> </td>
+				<td ng-show="c013"> <span> &nbsp; </span> </td>
+				<td ng-show="c014"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c015"> <span> &nbsp; </span> </td>
+				<td ng-show="c016"> <span> &nbsp; </span> </td>
+				<td ng-show="c017"> <span> &nbsp; </span> </td>
+				<td ng-show="c018"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c019"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c020"> <span> &nbsp; </span> </td>
+				<td ng-show="c021"> <span> &nbsp; </span> </td>
+				<td ng-show="c022"><img src="images/wrong.jpg" height="50" width="50"></td>
+				<td ng-show="c023"><img src="images/wrong.jpg" height="50" width="50"></td>
+			</tr>
+			
+		</table>
+		<br>
+	<h2 ng-show="c023" class="text-danger"> No. of Page Faults : 14</h2>
+	</div>
+	
+</div>
+  </body>
+</html>

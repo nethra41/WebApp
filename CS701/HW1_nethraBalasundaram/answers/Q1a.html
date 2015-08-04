@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Q1a</title>
+    <script type="text/javascript">
+    
+        function employee(){
+            this.salary = 50000;
+        }
+        employee.prototype.getSalary = function() {
+          console.log(this.salary);
+        };
+        
+        // employee type constructor
+        var emp = new employee();
+        emp.getSalary();   //50,000
+        
+        function manager() {}
+        
+        manager.prototype = new employee(); //inherit from employee
+        	manager.prototype.getSalary = function() {
+        	this.salary = this.salary + (this.salary/2);
+        	console.log(this.salary);
+        }; 
+        // manager type constructor
+        var mgr = new manager()
+        mgr.getSalary(); //100,000
+        
+      
+    </script>
+</head>
+<body>
+		<b>Output logged to console...</b>
+</body>
+</html>

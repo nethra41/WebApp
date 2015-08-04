@@ -1,0 +1,59 @@
+<!DOCTYPE html> 
+<html ng-app='myApp'> 
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MapQuest</title>
+        <script src="js/angular.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+	    
+    <script type="text/javascript" src="js/mapquest.js"></script>
+
+    <style>
+		#mqPage, #directionList {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+		}
+		
+		.from { font-weight: bold; }
+        .profile { width:28px; height:28px; }   
+        .tweet {font: italic 12px sans-serif;}
+    </style>
+	<script type="text/javascript">
+		function encodeFun(tag) {
+			var uri = tag;
+			var res = encodeURIComponent(uri);
+			return res;
+		}
+	</script>
+    
+</head>
+
+<body>   
+    <div ng-controller="MapController" ng-init=getData()>
+	<div id="mqPage">
+    
+        <form >
+            <input type="text" class="rounded" ng-model="from"/>
+            <input type="text" class="rounded" ng-model="to"/>
+             
+             <button class="rounded" ng-click="getData()">
+                 <i>Search</i></button>
+        </form>
+        <p></p>
+        <table>
+			<th colspan=4> Distance: {{info.distance}} - Time {{info.time/60 | setDecimal:2}}min</th>
+             <tr ng-repeat="item in route">
+                <td><img src='{{item.iconUrl}}' height="20px" width="20px"></td>
+				<td>{{item.index + 1}}.</td>
+				<td><a href='{{item.mapUrl}}' target=_x>{{item.narrative}}</a></td>
+				<td>{{item.distance}}</td>
+             </tr>
+		</table>
+        </div>
+    </div>
+</body>
+</html>

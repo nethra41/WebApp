@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>nutritionCycle - nethra</title>
+		<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" 
+                rel="stylesheet" />
+        <script type="text/javascript" 
+                src="js/jquery-1.8.0.min.js"></script>
+        <script type="text/javascript" 
+                src="js/jquery-ui-1.8.23.custom.min.js"></script>
+		
+		<script type="text/javascript" src="js/jquery.cycle.all.js"></script>
+		
+		<script type="text/javascript">
+		
+            var playList = [];
+			$(function() {
+
+                // load the images based on user's input
+                $("#loadButton").click(function() {
+					// clear the current images
+                    $('#images').html('');
+                    $('#images').removeAttr('style');
+                    $('#images').cycle("destroy");
+
+                    // make the ajax request
+                $.ajax({
+                    url : "cgi-bin/getData.php",
+                    data : {url : "http://kalathur.com/food/calories2.xml"},
+                    complete : function(xhr, result) {
+                        if (result != "success")
+                            return;
+                        var response = xhr.responseXML;
+						// get user input
+                    var tag = $('#tag').val();
+                        // for each <item> element						
+						$(response).find("item").each (function() {
+						
+                            var name = $(this).find("name").text();
+							var size = $(this).find("size").text();
+                            var cals = $(this).find("cals").text();
+                            var itms = {name : name, size : size, 
+                                        cals : cals};
+                           playList.push(itms); 
+                        });
+                        
+						var result = [];
+                // filter the data for matching entries
+                result = $.grep(playList,
+                    function(value, index) {
+                        return  (value.name.toLowerCase().indexOf(
+                            tag.toLowerCase()) == 0);
+                    });
+					
+					for(var i=0; i<= result.length; i++) 
+					{
+						// create div for every element in result
+						$("#images").append("<div id='x"+i+"'>");
+						// different id for every created div
+							$('#x'+i).append('<br><label for="name">Name: </label><output id="name">'+result[i].name+'</output><br>');
+							
+							$('#x'+i).append('<label for="size">Size: </label><output id="size">'+result[i].size+'</output><br>');
+							
+							$('#x'+i).append('<label for="cals">Calories: </label><output id="cals">'+result[i].cals+'</output><br><br>');
+                		// css for the div		
+						$('#x'+i).css({
+							border : "3px solid orange",
+							width : "400px",
+							borderRadius: "10px",
+							padding: "0px 0px 0px 10px",
+							margin: "0px 0px 10px 10px"
+													
+							});
+					}
+					}
+                })
+                });
+
+                // cycle through the images
+                $("#cycleButton").click(function() {
+
+                    $('#images').cycle({
+                        fx : 'curtainX',
+                        
+                        speed : 300,
+                        timeout : 1000
+                    });
+                })
+            });
+        </script>
+		
+		<style>
+            #images img { border:none;}
+        </style>
+	</head>
+	<body>
+    	<h1>jQuery Nutrition Cycle</h1>
+    	
+    	<div id="header">
+    	    <label for="tag">Tag:</label>
+            <input id="tag" value="rice"></input>
+      		<button id="loadButton">Load</button>
+      		<button id="cycleButton">Cycle</button>
+     	</div><br>
+     	<p>
+    	</p>
+    	<div id="images">
+    		
+        </div>	
+	</body>
+</html>
+
+

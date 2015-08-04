@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <title>nutritionInfo - Nethra</title>
+        <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" 
+                rel="stylesheet" />
+        <script type="text/javascript" 
+                src="js/jquery-1.8.0.min.js"></script>
+        <script type="text/javascript" 
+                src="js/jquery-ui-1.8.23.custom.min.js"></script>
+                
+        <script type="text/javascript">
+            // array of JSON objects
+            var playList = [];
+             
+            $(function() {
+                // disable the input until data is loaded
+                $('#target').attr("disabled", "disabled");
+                // make the ajax request
+                $.ajax({
+                    url : "cgi-bin/getData.php",
+                    data : {url : "http://kalathur.com/food/calories2.xml"},
+                    complete : function(xhr, result) {
+                        if (result != "success")
+                            return;
+                        var response = xhr.responseXML;
+                        // for each <item> element						
+						$(response).find("item").each (function() {
+                            var name = $(this).find("name").text();
+							var size = $(this).find("size").text();
+                            var cals = $(this).find("cals").text();
+                            var itms = 
+                                {label : name, 
+								value : name,
+								data : {name : name, size : size, 
+                                        cals : cals}};
+                           playList.push(itms); 
+                        });
+                        console.log(playList);
+						
+                    }
+                })
+                // enable the input
+                $('#target').removeAttr("disabled");
+             
+                // setup autocomplete options
+                var options = {
+                    source : selectEntries,
+                    select : makeSelection
+                };
+                $('#target').autocomplete(options);
+            });
+            
+            // request.term -- user entry
+            // callback -- to return array of values
+            function selectEntries (request, callback) {
+                console.log(request.term);
+                var result = [];
+                // filter the data for matching entries
+                result = $.grep(playList,
+                    function(value, index) {
+                        return  (value.label.toLowerCase().indexOf(
+                            request.term.toLowerCase()) == 0);
+                    });
+               // return the results
+               callback(result);
+            }
+            // when a selection is make
+            function makeSelection(event, ui) {
+                console.log(ui.item);
+                $('#name').val(ui.item.data.name);
+                $('#size').val(ui.item.data.size);
+                $('#cals').val(ui.item.data.cals);
+				$('#target').val(ui.item.data.name+ "/" +ui.item.data.size)
+            }
+        </script>
+    </head>
+    <body>
+        <h2>JQuery Nutrition Autocomplete</h2>
+        <div class="ui-widget">
+            <label for="target">Title: </label>
+            <input id="target" size="60"/>
+            <p></p>
+            <label for="name">Name: </label>
+            <output id="name"></output>
+            <p></p>
+            <label for="size">Serving Size: </label>
+            <output id="size"></output>
+            <p></p>
+            <label for="cals">Calories: </label>	
+            <output id="cals"></output>
+        </div>
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
